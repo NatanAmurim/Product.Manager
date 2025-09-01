@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManager.Api.Application;
 using ProductManager.Api.Application.Commands.Product;
-using ProductManager.Api.Controllers.Contracts.Requests;
+using ProductManager.Api.Controllers.Contracts.Requests.Products;
 using ProductManager.Api.Controllers.Contracts.Responses;
 using ProductManager.Api.Domain.Entities;
 
@@ -19,6 +20,7 @@ namespace ProductManager.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct(ProductCreateRequest productResquest) 
         {
             var product = new Product(productResquest.Name, productResquest.Price, productResquest.Quantity);
@@ -29,6 +31,7 @@ namespace ProductManager.Api.Controllers
         }
 
         [HttpGet("get-all-products")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetAllProducts()
         {            
             var getProductsResult = await _productService.GetProductsAsync();
@@ -37,6 +40,7 @@ namespace ProductManager.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetProduct(string id)
         {
             var getProductsResult = await _productService.GetProductAsync(id);
@@ -45,6 +49,7 @@ namespace ProductManager.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> UpdateProduct(ProductUpdateResquest productUpdateResquest)
         {
             var productUpdateCommand = new ProductUpdateCommand(productUpdateResquest.Id, productUpdateResquest.Name, productUpdateResquest.Price, productUpdateResquest.Quantity);
@@ -55,6 +60,7 @@ namespace ProductManager.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await _productService.DeleteProductAsync(id);
