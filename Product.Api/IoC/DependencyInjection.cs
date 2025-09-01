@@ -1,6 +1,8 @@
-﻿using ProductManager.Api.Application;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductManager.Api.Application;
 using ProductManager.Api.Domain.Interfaces;
-using ProductManager.Api.Infra;
+using ProductManager.Api.Infra.Persistence;
+using ProductManager.Api.Infra.Repositories;
 
 namespace ProductManager.Api.IoC
 {
@@ -15,6 +17,9 @@ namespace ProductManager.Api.IoC
 
         public static IServiceCollection AddDependencyRepositories(this IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseInMemoryDatabase("ProductsDb"));
+
             services.AddScoped<IProductRepository, ProductMemoryRepository>();
 
             return services;
