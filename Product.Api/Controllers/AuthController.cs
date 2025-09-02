@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using ProductManager.Api.Controllers.Contracts.Requests.Login;
 using ProductManager.Api.Controllers.Contracts.Responses;
 using ProductManager.Api.Infra.Authentication;
@@ -10,6 +11,7 @@ namespace ProductManager.Api.Controllers
     public class AuthController(JwtTokenGenerator jwtTokenGenerator): ControllerBase
     {
         [HttpPost]
+        [EnableRateLimiting("LoginPolicy")]
         public IActionResult Login([FromBody] LoginRequest loginRequest) 
         {
             if (loginRequest.UserName == "admin" && loginRequest.Password == "123")
