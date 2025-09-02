@@ -9,7 +9,7 @@ using ProductManager.Api.Infra.Repositories;
 using ProductManager.Api.IoC.Binds;
 using System.Text;
 
-namespace ProductManager.Api.IoC
+namespace ProductManager.Api.IoC.Extensions
 {
     public static class DependencyInjection
     {

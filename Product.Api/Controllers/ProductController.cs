@@ -5,6 +5,7 @@ using ProductManager.Api.Application.Commands.Product;
 using ProductManager.Api.Controllers.Contracts.Requests.Products;
 using ProductManager.Api.Controllers.Contracts.Responses;
 using ProductManager.Api.Domain.Entities;
+using ProductManager.Api.IoC.Extensions;
 
 namespace ProductManager.Api.Controllers
 {
@@ -23,7 +24,7 @@ namespace ProductManager.Api.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct(ProductCreateRequest productResquest) 
         {
-            var product = new Product(productResquest.Name, productResquest.Price, productResquest.Quantity);
+            var product = new Product(productResquest.Name.Sanitize(), productResquest.Price, productResquest.Quantity);
 
             var productCreateResult = await _productService.AddProductAsync(product);
 
@@ -52,7 +53,7 @@ namespace ProductManager.Api.Controllers
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> UpdateProduct(ProductUpdateResquest productUpdateResquest)
         {
-            var productUpdateCommand = new ProductUpdateCommand(productUpdateResquest.Id, productUpdateResquest.Name, productUpdateResquest.Price, productUpdateResquest.Quantity);
+            var productUpdateCommand = new ProductUpdateCommand(productUpdateResquest.Id, productUpdateResquest.Name.Sanitize(), productUpdateResquest.Price, productUpdateResquest.Quantity);
 
             await _productService.UpdateProductAsync(productUpdateCommand);
 

@@ -1,6 +1,7 @@
-﻿using System.Threading.RateLimiting;
+﻿using ProductManager.Api.IoC.Extensions;
+using System.Threading.RateLimiting;
 
-namespace ProductManager.Api.IoC
+namespace ProductManager.Api.IoC.Extensions
 {
     public static class SecurityServicesExtensions
     {
