@@ -1,4 +1,4 @@
-using ProductManager.Api.IoC.Extensions;
+using ProductManager.Api.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddlewares();
 
 app.UseHttpsRedirection();
 

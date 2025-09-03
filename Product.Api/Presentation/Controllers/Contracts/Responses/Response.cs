@@ -1,4 +1,4 @@
-﻿namespace ProductManager.Api.Controllers.Contracts.Responses
+﻿namespace ProductManager.Api.Presentation.Controllers.Contracts.Responses
 {
     public class Response<T>
     {

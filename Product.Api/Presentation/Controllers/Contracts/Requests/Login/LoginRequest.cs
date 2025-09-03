@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductManager.Api.Controllers.Contracts.Requests.Login
+namespace ProductManager.Api.Presentation.Controllers.Contracts.Requests.Login
 {
     public class LoginRequest
     {

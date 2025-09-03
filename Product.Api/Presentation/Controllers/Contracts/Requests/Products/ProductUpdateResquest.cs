@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductManager.Api.Controllers.Contracts.Requests.Products
+namespace ProductManager.Api.Presentation.Controllers.Contracts.Requests.Products
 {
-    public class ProductCreateRequest
+    public class ProductUpdateResquest
     {
+        [Required]
+        public string Id { get; set; } = string.Empty;
+
         [Required]
         public string Name { get; set; } = string.Empty;
 

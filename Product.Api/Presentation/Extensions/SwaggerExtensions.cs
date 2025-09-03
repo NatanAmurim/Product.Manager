@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace ProductManager.Api.IoC.Extensions
+namespace ProductManager.Api.Presentation.Extensions
 {
     public static class SwaggerExtensions
     {

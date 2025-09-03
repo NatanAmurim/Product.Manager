@@ -1,6 +1,6 @@
 ﻿using Ganss.Xss;
 
-namespace ProductManager.Api.IoC.Extensions
+namespace ProductManager.Api.Presentation.Extensions
 {
     public static class SanitizerExtensions
     {

@@ -2,27 +2,27 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManager.Api.Application;
 using ProductManager.Api.Application.Commands.Product;
-using ProductManager.Api.Controllers.Contracts.Requests.Products;
-using ProductManager.Api.Controllers.Contracts.Responses;
 using ProductManager.Api.Domain.Entities;
-using ProductManager.Api.IoC.Extensions;
+using ProductManager.Api.Presentation.Controllers.Contracts.Requests.Products;
+using ProductManager.Api.Presentation.Controllers.Contracts.Responses;
+using ProductManager.Api.Presentation.Extensions;
 
-namespace ProductManager.Api.Controllers
+namespace ProductManager.Api.Presentation.Controllers
 {
     [ApiController]
     [Route("product")]
     public class ProductController : ControllerBase
-    {        
+    {
         private readonly ProductService _productService;
 
         public ProductController(ProductService productService)
-        {            
+        {
             _productService = productService;
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateProduct(ProductCreateRequest productResquest) 
+        public async Task<IActionResult> CreateProduct(ProductCreateRequest productResquest)
         {
             var product = new Product(productResquest.Name.Sanitize(), productResquest.Price, productResquest.Quantity);
 
@@ -34,7 +34,7 @@ namespace ProductManager.Api.Controllers
         [HttpGet("get-all-products")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetAllProducts()
-        {            
+        {
             var getProductsResult = await _productService.GetProductsAsync();
 
             return CreatedAtAction(nameof(GetAllProducts), new Response<IEnumerable<Product>>("List of all products.", "", getProductsResult));
