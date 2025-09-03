@@ -1,3 +1,4 @@
+using ProductManager.Api.IoC;
 using ProductManager.Api.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
